@@ -10,7 +10,7 @@ app.use(cors());
 app.use('/customers',customerRoutes);
 
 customerRoutes.route('/').get((req,res)=>{
-    Customer.find((err,res) => {
+    Customer.find((err,customers) => {
         if(err){
             console.log(err);
         }
@@ -22,7 +22,7 @@ customerRoutes.route('/').get((req,res)=>{
 
 customerRoutes.route('/:id').get((req,res) =>{
     let id = req.params.id;
-    Customer.findById(id,(err,res)=>{
+    Customer.findById(id,(err,customer)=>{
         res.json(customer);
     });
 });
@@ -39,7 +39,7 @@ customerRoutes.route('/add').post((req,res)=>{
 });
 
 customerRoutes.route('/update/:id').post((req,res)=>{
-    Customer.findById(req.params.id,(err,res)=>{
+    Customer.findById(req.params.id,(err,customer)=>{
         if(!customer){
             res.status(404).send("Customer not found!");
         }
