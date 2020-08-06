@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use('/customers',customerRoutes);
 
-customerRoutes.get('/',(req,res)=>{
+customerRoutes.route('/').get((req,res)=>{
     Customer.find((err,res) => {
         if(err){
             console.log(err);
@@ -82,4 +82,4 @@ const port = process.env.PORT || 5000;
 let Customer = require('./customer.model');
 
 
-app.listen(port, () => {console.log("Customer backend running on port 5000")});
+app.listen(port, () => {console.log(`Customer backend running on port ${port} `)});
